@@ -6,10 +6,17 @@ import cmd
 import os
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 import models
 import shlex
 
-classes = {'BaseModel': BaseModel, 'User': User}
+classes = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
+           'State': State, 'City': City, 'Amenity': Amenity, 'Review': Review}
+
 
 class HBNBCommand(cmd.Cmd):
     """Command interpreter"""
@@ -97,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
                     if temp['__class__'] == line[0]:
                         obj_list.append(str(obj[item]))
                 print(obj_list)
-            except:
+            except Exception:
                 print("** class doesn't exist **")
 
     def do_update(self, line):
@@ -109,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             try:
                 eval(str(line[0]))
-            except:
+            except Exception:
                 print("** class doesn't exist **")
                 return
             if len(line) == 1:
