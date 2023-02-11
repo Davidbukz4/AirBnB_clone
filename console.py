@@ -3,7 +3,6 @@
 Command Interpreter
 """
 import cmd
-import os
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -16,7 +15,9 @@ import shlex
 
 
 class HBNBCommand(cmd.Cmd):
-    """Command interpreter"""
+    """
+    Command interpreter
+    """
     prompt = "(hbnb) "
     classes = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
                'State': State, 'City': City, 'Amenity': Amenity,
@@ -135,7 +136,6 @@ based or not on the class name\n"""
                         else:
                             setattr(objects[key], line[2], line[3])
                             models.storage.save()
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
