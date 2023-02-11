@@ -14,16 +14,17 @@ from models.review import Review
 import models
 import shlex
 
-classes = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
-           'State': State, 'City': City, 'Amenity': Amenity, 'Review': Review}
-
 
 class HBNBCommand(cmd.Cmd):
     """Command interpreter"""
     prompt = "(hbnb) "
+    classes = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
+               'State': State, 'City': City, 'Amenity': Amenity,
+               'Review': Review}
 
     def do_EOF(self, line):
         """Exit the program\n"""
+        print()
         return True
 
     def do_quit(self, line):
