@@ -136,5 +136,6 @@ based or not on the class name\n"""
                             setattr(objects[key], line[2], line[3])
                             models.storage.save()
 
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
