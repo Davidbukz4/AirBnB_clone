@@ -87,8 +87,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_all(self, line):
-        """Prints all string representation of all instances
-            based or not on the class name\n"""
+        """Prints all string representation of all instances\
+based or not on the class name\n"""
         obj = models.storage.all()
         obj_list = []
         if line is "":
