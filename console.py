@@ -32,7 +32,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
-        """Doesn't execute anything"""
+        """Doesn't execute anything\n"""
         pass
 
     def do_create(self, line):
@@ -108,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, line):
-        """Updates an instance based on the class name and id by\
+        """Updates an instance based on the class name and id by
             adding or updating attribute\n"""
         line = shlex.split(line)
         if len(line) == 0:
