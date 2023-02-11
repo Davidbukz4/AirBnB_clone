@@ -4,6 +4,7 @@ FileStorage
 """
 import json
 import os
+from datetime import datetime
 
 
 class FileStorage:
@@ -23,18 +24,22 @@ class FileStorage:
 
     def save(self):
         """serializes __objects to the JSON file"""
-        dict_fmt = FileStorage.__objects.copy()
-        dict_fmt = {k: v.to_dict() for k, v in dict_fmt.items()}
+        dict_fmt = {}
+#        dict_fmt = {k: v=v.to_dict() for k, v in dict_fmt.items()}
+        for k, v in FileStorage.__objects.items():
+            v = v.to_dict()
+            dict_fmt[k] = v
         with open(FileStorage.__file_path, 'w') as f:
             json.dump(dict_fmt, f)
 
     def reload(self):
         """deserializes the JSON file to __objects"""
+        from models.base_model import BaseModel
         try:
             if os.path.exists(FileStorage.__file_path):
                 with open(FileStorage.__file_path, 'r') as f:
                     json_object = json.load(f)
                 for key, value in json_object.items():
-                    FileStorage.__objects[key] = value
+                    FileStorage.__objects[key] = BaseModel(**value)
         except FileNotFoundError:
             pass
