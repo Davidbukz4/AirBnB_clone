@@ -10,7 +10,7 @@ from models.base_model import BaseModel
 class TestUser(unittest.TestCase):
     """ Test User Class """
     model = User()
-    model.name = "Betty"
+    model.name = "David"
 
     def test_checking_for_docstring_User(self):
         """Test if all docstring were written"""

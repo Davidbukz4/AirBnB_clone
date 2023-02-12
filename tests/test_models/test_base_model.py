@@ -18,10 +18,10 @@ class BaseModelTest(unittest.TestCase):
     def setUpClass(cls):
         """ Setup an instance for test"""
         cls.my_model = BaseModel()
-        cls.my_model.name = "Holberton"
+        cls.my_model.name = "David"
         cls.my_model.my_number = 89
         cls.my_model2 = BaseModel()
-        cls.my_model2.name = "Holberton"
+        cls.my_model2.name = "David"
         cls.my_model2.my_number = 89
 
     @classmethod
@@ -48,8 +48,8 @@ class BaseModelTest(unittest.TestCase):
         assigned"""
         self.assertTrue(isinstance(self.my_model, BaseModel))
         self.assertTrue(isinstance(self.my_model2, BaseModel))
-        self.assertEqual(self.my_model.name, "Holberton")
-        self.assertEqual(self.my_model2.name, "Holberton")
+        self.assertEqual(self.my_model.name, "David")
+        self.assertEqual(self.my_model2.name, "David")
         self.assertEqual(self.my_model.my_number, 89)
         self.assertEqual(self.my_model.my_number, 89)
 
@@ -88,7 +88,7 @@ class BaseModelTest(unittest.TestCase):
         my_model_json = self.my_model.to_dict()
         my_new_model = BaseModel(**my_model_json)
         self.assertTrue(isinstance(my_new_model, BaseModel))
-        self.assertEqual(my_new_model.name, "Holberton")
+        self.assertEqual(my_new_model.name, "David")
         self.assertEqual(my_new_model.my_number, 89)
         self.assertEqual(my_new_model.id, self.my_model.id)
         self.assertEqual(my_new_model.created_at, self.my_model.created_at)
