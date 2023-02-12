@@ -47,7 +47,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             if line in classes:
-                new_inst = eval(line + "()")
+                line = line.split()
+                new_inst = eval(line[0] + "()")
                 new_inst.save()
                 print(new_inst.id)
             else:
