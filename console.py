@@ -49,7 +49,6 @@ class HBNBCommand(cmd.Cmd):
             if line in classes:
                 new_inst = eval(line + "()")
                 new_inst.save()
-                storage.reload()
                 print(new_inst.id)
             else:
                 print("** class doesn't exist **")
