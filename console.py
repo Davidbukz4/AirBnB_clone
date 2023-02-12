@@ -27,9 +27,15 @@ class HBNBCommand(cmd.Cmd):
         """Exit the program\n"""
         return True
 
+    def help_EOF(self):
+        print("CTRL + D (EOF) to exit the program")
+
     def do_quit(self, line):
         """Quit command to exit the program\n"""
         return True
+
+    def help_quit(self):
+        print("Quit command to exit the program")
 
     def emptyline(self):
         """Doesn't execute anything"""
@@ -46,6 +52,9 @@ class HBNBCommand(cmd.Cmd):
                 print(new_inst.id)
             else:
                 print("** class doesn't exist **")
+
+    def help_create(self):
+        print("Usage: create <valid class name>")
 
     def do_show(self, line):
         """Prints the string representation of an instance\n"""
@@ -65,6 +74,9 @@ class HBNBCommand(cmd.Cmd):
                         print("** no instance found **")
             else:
                 print("** class doesn't exist **")
+
+    def help_show(self):
+        print("Usage: show <valid class name> <valid id>")
 
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id\n"""
@@ -86,6 +98,9 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
+    def help_destroy(self):
+        print("Usage: destroy <valid class name> <valid id>")
+
     def do_all(self, line):
         """Prints all string representation of all instances\
 based or not on the class name\n"""
@@ -106,6 +121,9 @@ based or not on the class name\n"""
                 print(obj_list)
             except Exception:
                 print("** class doesn't exist **")
+
+    def help_all(self):
+        print("Usage: all OR all <valid class name>")
 
     def do_update(self, line):
         """Updates an instance based on the class name and id by\
@@ -135,6 +153,10 @@ based or not on the class name\n"""
                         else:
                             setattr(objects[key], line[2], line[3])
                             models.storage.save()
+
+    def help_update(self):
+        print("Usage: update <valid class name>", end="")
+        print("<valid id> <attribute name> <attribute value>")
 
 
 if __name__ == '__main__':
