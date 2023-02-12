@@ -10,7 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-import models
+from models.__init__ import storage
 import shlex
 
 classes = {'BaseModel': BaseModel, 'User': User, 'Place': Place,
@@ -68,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** instance id missing **")
                 else:
                     key = str(line[0]) + "." + str(line[1])
-                    obj = models.storage.all()
+                    obj = storage.all()
                     if key in obj:
                         print(obj[key])
                     else:
@@ -93,7 +93,7 @@ class HBNBCommand(cmd.Cmd):
                     obj = models.storage.all()
                     if key in obj:
                         del(obj[key])
-                        models.storage.save()
+                        storage.save()
                     else:
                         print("** no instance found **")
             else:
@@ -153,7 +153,7 @@ based or not on the class name\n"""
                             print("** value missing **")
                         else:
                             setattr(objects[key], line[2], line[3])
-                            models.storage.save()
+                            storage.save()
 
     def help_update(self):
         print("Usage: update <valid class name>", end="")
