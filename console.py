@@ -66,7 +66,7 @@ class HBNBCommand(cmd.Cmd):
             if line[0] in classes:
                 if len(line) < 2:
                     print("** instance id missing **")
-                elif len(line) == 2:
+                else:
                     key = str(line[0]) + "." + str(line[1])
                     obj = models.storage.all()
                     if key in obj:
