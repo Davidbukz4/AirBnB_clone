@@ -9,11 +9,21 @@ from uuid import uuid4
 
 class BaseModel:
     ''' Defines common attributes/methods for other classes '''
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         ''' public initializes instances '''
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+        if kwargs:
+            del kwargs['__class__']
+            kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
+            kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
+                                                     '%Y-%m-%dT%H:%M:%S.%f')
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
 
     def __str__(self):
         ''' Returns a string representation of the object '''
