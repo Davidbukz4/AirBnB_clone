@@ -39,7 +39,8 @@ class BaseModel:
 
     def to_dict(self):
         ''' returns a dictionary containing all keys/values of the instance'''
-        self.__dict__['__class__'] = self.__class__.__name__
-        self.__dict__['created_at'] = self.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        self.__dict__['updated_at'] = self.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        return self.__dict__
+        dic_objs = self.__dict__.copy()
+        dic_objs['__class__'] = self.__class__.__name__
+        dic_objs['created_at'] = dic_objs['created_at'].isoformat()
+        dic_objs['updated_at'] = dic_objs['updated_at'].isoformat()
+        return dic_objs
