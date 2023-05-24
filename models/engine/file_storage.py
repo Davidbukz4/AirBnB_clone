@@ -4,6 +4,7 @@ File Storage
 '''
 import os
 import json
+import models
 from models.base_model import BaseModel
 
 class FileStorage:
@@ -42,7 +43,7 @@ class FileStorage:
             if os.path.exists(self.__file_path):
                 with open(self.__file_path) as f:
                     objs = json.load(f)
-                    for key, value in objs.items():
-                        self.__objects[key] = BaseModel(**value)
+                for key, value in objs.items():
+                    self.__objects[key] = BaseModel(**value)
         except Exception:
             pass
