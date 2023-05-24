@@ -6,6 +6,7 @@ BASE MODEL
 
 from datetime import datetime
 from uuid import uuid4
+import models
 
 class BaseModel:
     ''' Defines common attributes/methods for other classes '''
@@ -24,6 +25,7 @@ class BaseModel:
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
+            models.storage.new(self)
 
     def __str__(self):
         ''' Returns a string representation of the object '''
@@ -33,6 +35,7 @@ class BaseModel:
     def save(self):
         ''' updates the attribute "updated_at" with the current time '''
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         ''' returns a dictionary containing all keys/values of the instance'''
