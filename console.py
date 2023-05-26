@@ -50,24 +50,18 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         """Prints the string representation of an instance\n"""
         line = line.split(' ')
-        if len(line) == 2:
+        if line and line[0]:
             if line[0] == 'BaseModel':
-                objs = models.storage.all()
-                obj_dic = []
-                for key, value in objs.items():
-                    key_obj = key.split('.')[1]
-                    if key_obj == line[1]:
-                        obj_dic.append(objs[key])
-                if obj_dic:
-                    for x in obj_dic:
-                        print(x)
+                if len(line) == 1:
+                    print('** instance id missing **')
                     return
-                print('** no instance found **')
-        elif len(line) == 1 and line[0]:
-            if line[0] == 'BaseModel':
-                print('** instance id missing **')
-                return
-            print("** class doesn't exist **")
+                inst = '{}.{}'.format(line[0], line[1])
+                if inst in models.storage.all():
+                        print(models.storage.all()[inst])
+                else:
+                    print('** no instance found **')
+            else:
+                print("** class doesn't exist **")
         else:
             print('** class name missing **')
 
