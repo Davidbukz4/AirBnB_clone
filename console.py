@@ -3,8 +3,13 @@
 Command Interpreter
 """
 import cmd
-from models.base_model import BaseModel
 import models
+from models.base_model import BaseModel
+from models.user import User
+
+classes = {
+            'BaseModel': BaseModel, 'User': User
+        }
 
 
 class HBNBCommand(cmd.Cmd):
@@ -35,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
         """Creates a new instance of BaseModel\n"""
         line = line.split(' ')
         if line[0]:
-            if line[0] == 'BaseModel':
+            if line[0] in classes:
                 inst = eval(line[0] + '()')
                 models.storage.save()
                 print(inst.id)
@@ -51,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
         """Prints the string representation of an instance\n"""
         line = line.split(' ')
         if line and line[0]:
-            if line[0] == 'BaseModel':
+            if line[0] in classes:
                 if len(line) == 1:
                     print('** instance id missing **')
                     return
@@ -72,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
         """Deletes an instance based on the class name and id\n"""
         line = line.split(' ')
         if line and line[0]:
-            if line[0] == 'BaseModel':
+            if line[0] in classes:
                 if len(line) == 1:
                     print('** instance id missing **')
                     return
@@ -97,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
         line = line.split(' ')
         objs = models.storage.all()
         if len(line) == 1 and line[0]:
-            if line[0] == 'BaseModel':
+            if line[0] in classes:
                 for key in objs:
                     if key.split('.')[0] == line[0]:
                         print(objs[key])
@@ -115,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
            adding or updating attribute\n"""
         line = line.split(' ')
         if line and line[0]:
-            if line[0] == 'BaseModel':
+            if line[0] in classes:
                 if len(line) == 1:
                     print('** instance id missing **')
                     return

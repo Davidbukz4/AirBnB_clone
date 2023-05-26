@@ -6,6 +6,11 @@ import os
 import json
 import models
 from models.base_model import BaseModel
+from models.user import User
+
+classes = {
+            'BaseModel': BaseModel, 'User': User
+        }
 
 
 class FileStorage:
@@ -45,6 +50,7 @@ class FileStorage:
                 with open(self.__file_path) as f:
                     objs = json.load(f)
                 for key, value in objs.items():
-                    self.__objects[key] = BaseModel(**value)
+                    obj_class = key.split('.')[0]
+                    self.__objects[key] = classes[obj_class](**value)
         except Exception:
             pass
