@@ -84,7 +84,8 @@ class HBNBCommand(cmd.Cmd):
                     del models.storage.all()[key]
                     models.storage.save()
                     return
-                print('** no instance found **')
+                else:
+                    print('** no instance found **')
         elif len(line) == 1 and line[0]:
             if line[0] == 'BaseModel':
                 print('** instance id missing **')
