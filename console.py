@@ -77,8 +77,11 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id\n"""
         line = line.split(' ')
-        if len(line) == 2:
+        if line and line[0]:
             if line[0] == 'BaseModel':
+                if len(line) == 1:
+                    print('** instance id missing **')
+                    return
                 key = '{}.{}'.format(line[0], line[1])
                 if key in models.storage.all():
                     del models.storage.all()[key]
@@ -86,11 +89,8 @@ class HBNBCommand(cmd.Cmd):
                     return
                 else:
                     print('** no instance found **')
-        elif len(line) == 1 and line[0]:
-            if line[0] == 'BaseModel':
-                print('** instance id missing **')
-                return
-            print("** class doesn't exist **")
+            else:
+                print("** class doesn't exist **")
         else:
             print('** class name missing **')
 
